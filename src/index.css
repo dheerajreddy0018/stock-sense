@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-100 font-sans transition-colors duration-200;
+  }
+
+  /* Custom scrollbar for industrial UI */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-700/60 rounded-full hover:bg-slate-600;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-slate-900/70 backdrop-blur-md border border-slate-800/80 shadow-xl;
+  }
+  .glass-panel-hover {
+    @apply hover:border-slate-700 hover:bg-slate-800/80 transition-all duration-200;
+  }
+  .glass-panel-light {
+    @apply bg-white/80 backdrop-blur-md border border-slate-200 shadow-md;
+  }
+}
