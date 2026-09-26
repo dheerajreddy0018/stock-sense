@@ -8,17 +8,13 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Card: React.FC<CardProps> = ({
   className,
-  glass = true,
   children,
   ...props
 }) => {
   return (
     <div
       className={cn(
-        'rounded-2xl transition-all',
-        glass
-          ? 'glass-panel'
-          : 'bg-slate-900 border border-slate-800 shadow-lg',
+        'enterprise-card p-5',
         className
       )}
       {...props}
@@ -43,7 +39,7 @@ export const CardTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
   children,
   ...props
 }) => (
-  <h3 className={cn('text-sm font-semibold text-slate-100 tracking-tight', className)} {...props}>
+  <h3 className={cn('text-sm font-semibold text-slate-900 dark:text-slate-100 tracking-tight', className)} {...props}>
     {children}
   </h3>
 );
@@ -75,57 +71,53 @@ export const StatCard: React.FC<StatCardProps> = ({
   subtitle,
   icon: Icon,
   trend,
-  accentColor = 'emerald',
   onClick,
   className,
 }) => {
-  const accentStyles = {
-    emerald: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20 group-hover:border-emerald-500/40',
-    cyan: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20 group-hover:border-cyan-500/40',
-    amber: 'text-amber-400 bg-amber-500/10 border-amber-500/20 group-hover:border-amber-500/40',
-    rose: 'text-rose-400 bg-rose-500/10 border-rose-500/20 group-hover:border-rose-500/40',
-    indigo: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20 group-hover:border-indigo-500/40',
-  };
-
   return (
     <div
       onClick={onClick}
       className={cn(
-        'group glass-panel rounded-2xl p-5 relative overflow-hidden transition-all duration-200',
-        onClick && 'cursor-pointer hover:border-slate-700 hover:bg-slate-900/80 active:scale-[0.99]',
+        'enterprise-card p-4 sm:p-5 relative transition-all duration-150',
+        onClick && 'cursor-pointer hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-sm active:scale-[0.995]',
         className
       )}
     >
       <div className="flex items-start justify-between">
-        <div>
-          <p className="text-xs font-medium text-slate-400 tracking-wide uppercase">{title}</p>
-          <div className="mt-2 text-2xl sm:text-3xl font-bold font-mono tracking-tight text-white">
+        <div className="min-w-0 pr-2">
+          <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 tracking-wide uppercase">
+            {title}
+          </p>
+          <div className="mt-1.5 text-2xl font-semibold font-mono tracking-tight text-slate-900 dark:text-white tabular-nums">
             {value}
           </div>
-          {subtitle && <p className="mt-1 text-xs text-slate-400">{subtitle}</p>}
+          {subtitle && (
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 truncate">
+              {subtitle}
+            </p>
+          )}
         </div>
 
-        <div
-          className={cn(
-            'w-11 h-11 rounded-xl flex items-center justify-center border transition-all duration-300',
-            accentStyles[accentColor]
-          )}
-        >
-          <Icon className="w-5 h-5 transition-transform group-hover:scale-110" />
+        <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 flex items-center justify-center text-slate-600 dark:text-slate-300 flex-shrink-0">
+          <Icon className="w-4 h-4" />
         </div>
       </div>
 
       {trend && (
-        <div className="mt-3.5 pt-3 border-t border-slate-800/80 flex items-center gap-1.5 text-xs">
+        <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-1.5 text-[11px]">
           <span
             className={cn(
               'font-mono font-medium',
-              trend.isPositive ? 'text-emerald-400' : 'text-rose-400'
+              trend.isPositive ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'
             )}
           >
             {trend.value}
           </span>
-          {trend.label && <span className="text-slate-400">{trend.label}</span>}
+          {trend.label && (
+            <span className="text-slate-500 dark:text-slate-400 truncate">
+              {trend.label}
+            </span>
+          )}
         </div>
       )}
     </div>

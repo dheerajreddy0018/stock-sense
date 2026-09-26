@@ -7,7 +7,7 @@ export const Table: React.FC<React.TableHTMLAttributes<HTMLTableElement>> = ({
   ...props
 }) => (
   <div className="w-full overflow-x-auto">
-    <table className={cn('w-full text-left text-sm text-slate-300', className)} {...props}>
+    <table className={cn('w-full text-left text-xs sm:text-sm text-slate-700 dark:text-slate-300', className)} {...props}>
       {children}
     </table>
   </div>
@@ -20,7 +20,7 @@ export const TableHeader: React.FC<React.HTMLAttributes<HTMLTableSectionElement>
 }) => (
   <thead
     className={cn(
-      'text-[11px] uppercase tracking-wider text-slate-400 bg-slate-900/60 border-b border-slate-800 font-mono',
+      'text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 bg-slate-50/80 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800 font-mono',
       className
     )}
     {...props}
@@ -34,7 +34,7 @@ export const TableBody: React.FC<React.HTMLAttributes<HTMLTableSectionElement>> 
   children,
   ...props
 }) => (
-  <tbody className={cn('divide-y divide-slate-800/60 text-xs', className)} {...props}>
+  <tbody className={cn('divide-y divide-slate-100 dark:divide-slate-800/60 text-xs', className)} {...props}>
     {children}
   </tbody>
 );
@@ -46,7 +46,7 @@ export const TableRow: React.FC<React.HTMLAttributes<HTMLTableRowElement>> = ({
 }) => (
   <tr
     className={cn(
-      'transition-colors hover:bg-slate-800/40 data-[state=selected]:bg-slate-800',
+      'transition-colors hover:bg-slate-50/80 dark:hover:bg-slate-800/40',
       className
     )}
     {...props}
@@ -60,7 +60,7 @@ export const TableHead: React.FC<React.ThHTMLAttributes<HTMLTableCellElement>> =
   children,
   ...props
 }) => (
-  <th className={cn('px-4 py-3 font-semibold text-slate-300', className)} {...props}>
+  <th className={cn('px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 whitespace-nowrap', className)} {...props}>
     {children}
   </th>
 );
@@ -70,7 +70,7 @@ export const TableCell: React.FC<React.TdHTMLAttributes<HTMLTableCellElement>> =
   children,
   ...props
 }) => (
-  <td className={cn('px-4 py-3 align-middle text-slate-200', className)} {...props}>
+  <td className={cn('px-4 py-3 align-middle text-slate-800 dark:text-slate-200', className)} {...props}>
     {children}
   </td>
 );

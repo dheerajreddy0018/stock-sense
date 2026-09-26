@@ -18,19 +18,19 @@ interface CategoryBreakdownChartProps {
   }>;
 }
 
-const COLORS = ['#22c55e', '#06b6d4', '#f59e0b', '#8b5cf6', '#ec4899', '#3b82f6'];
+const COLORS = ['#10b981', '#0ea5e9', '#f59e0b', '#6366f1', '#ec4899', '#64748b'];
 
 export const CategoryBreakdownChart: React.FC<CategoryBreakdownChartProps> = ({ data }) => {
   return (
-    <div className="glass-panel rounded-2xl p-5 border border-slate-800 flex flex-col h-80">
-      <div className="flex items-center justify-between pb-3 border-b border-slate-800/80 mb-2">
+    <div className="enterprise-card p-5 flex flex-col h-80">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800/80 mb-2">
         <div className="flex items-center gap-2">
-          <PieIcon className="w-4 h-4 text-amber-400" />
-          <h3 className="text-sm font-semibold text-white tracking-tight">
+          <PieIcon className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">
             Inventory by Category
           </h3>
         </div>
-        <span className="text-[11px] font-mono text-slate-400">Valuation Share</span>
+        <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">Valuation Share</span>
       </div>
 
       <div className="flex-1 w-full min-h-0 pt-2">
@@ -40,9 +40,9 @@ export const CategoryBreakdownChart: React.FC<CategoryBreakdownChartProps> = ({ 
               data={data}
               cx="50%"
               cy="50%"
-              innerRadius={55}
-              outerRadius={80}
-              paddingAngle={4}
+              innerRadius={52}
+              outerRadius={78}
+              paddingAngle={3}
               dataKey="value"
             >
               {data.map((_, index) => (
@@ -51,12 +51,12 @@ export const CategoryBreakdownChart: React.FC<CategoryBreakdownChartProps> = ({ 
             </Pie>
             <Tooltip
               contentStyle={{
-                backgroundColor: '#0b1120',
-                borderColor: '#1e293b',
-                borderRadius: '0.75rem',
+                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                borderColor: 'rgba(255, 255, 255, 0.1)',
+                borderRadius: '0.5rem',
                 fontSize: '12px',
                 color: '#f8fafc',
-                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
               }}
               formatter={(value: number, _, item) => [
                 `${formatCurrency(value)} (${item.payload.count} units)`,
@@ -65,7 +65,7 @@ export const CategoryBreakdownChart: React.FC<CategoryBreakdownChartProps> = ({ 
             />
             <Legend
               wrapperStyle={{ fontSize: '11px', paddingTop: '8px' }}
-              formatter={(value) => <span className="text-slate-300 font-medium">{value}</span>}
+              formatter={(value) => <span className="text-slate-600 dark:text-slate-300 font-medium">{value}</span>}
             />
           </PieChart>
         </ResponsiveContainer>

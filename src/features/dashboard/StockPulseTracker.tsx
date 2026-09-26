@@ -9,7 +9,7 @@ import {
   Send,
   CheckCircle2,
   Clock,
-  Sparkles,
+  Activity,
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import { Badge } from '../../components/ui/Badge';
@@ -43,37 +43,39 @@ export const StockPulseTracker: React.FC<StockPulseTrackerProps> = ({ items }) =
   const currentStageIndex = stageOrder.indexOf(activeItem?.currentStage || 'LOCATION');
 
   return (
-    <div className="glass-panel rounded-2xl p-5 sm:p-6 border border-emerald-500/20 shadow-glow-primary/10">
+    <div className="enterprise-card p-5 sm:p-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-800 gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800/80 gap-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-glow-primary">
-            <Sparkles className="w-4 h-4 text-white animate-pulse" />
+          <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+            <Activity className="w-4 h-4" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-base font-bold text-white tracking-tight">Stock Pulse</h3>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">
+                Stock Pulse Traceability
+              </h3>
               <Badge variant="success" size="sm" dot>
-                Signature Pipeline Engine
+                Live Flow
               </Badge>
             </div>
-            <p className="text-xs text-slate-400">
-              Live material flow tracing: Supplier → Receipt → Warehouse → Transfer → Location → Delivery
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Audited route: Supplier → Inward Dock → Staged Warehouse → Inter-hub Transfer → Bin Allocation → Customer Delivery
             </p>
           </div>
         </div>
 
         {/* Consignment Switcher */}
-        <div className="flex items-center gap-1.5 self-start sm:self-auto">
-          <span className="text-[11px] font-mono text-slate-400">Consignment:</span>
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">Tracking:</span>
           <select
             value={selectedItemId}
             onChange={(e) => setSelectedItemId(e.target.value)}
-            className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-xs text-emerald-400 font-mono focus:outline-none focus:border-emerald-500"
+            className="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-800 dark:text-slate-200 font-mono focus:outline-none focus:border-slate-400 dark:focus:border-slate-700"
           >
             {items.map((it) => (
-              <option key={it.id} value={it.id} className="bg-slate-900 text-slate-200">
-                {it.sku} - {it.quantity} units ({it.receiptNumber})
+              <option key={it.id} value={it.id} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-200">
+                {it.sku} ({it.quantity} units) • {it.receiptNumber}
               </option>
             ))}
           </select>
@@ -81,46 +83,46 @@ export const StockPulseTracker: React.FC<StockPulseTrackerProps> = ({ items }) =
       </div>
 
       {activeItem && (
-        <div className="mt-5 space-y-6">
-          {/* Active SKU Overview */}
-          <div className="flex flex-wrap items-center justify-between gap-4 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800">
+        <div className="mt-4 space-y-5">
+          {/* Active Consignment Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-4 p-3.5 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80">
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
-                Tracking SKU
+              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                Product & Consignment
               </span>
-              <h4 className="text-sm font-bold text-white">{activeItem.productName}</h4>
-              <span className="text-xs font-mono text-emerald-400">{activeItem.sku}</span>
+              <h4 className="text-sm font-semibold text-slate-900 dark:text-white">{activeItem.productName}</h4>
+              <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-medium">{activeItem.sku}</span>
             </div>
 
             <div className="flex items-center gap-6 text-xs">
               <div>
-                <span className="text-slate-400 block text-[10px] uppercase font-mono">Consignment Batch</span>
-                <span className="font-mono text-slate-200 font-semibold">{activeItem.quantity} Units</span>
+                <span className="text-slate-500 dark:text-slate-400 block text-[10px] uppercase font-mono">Consignment Batch</span>
+                <span className="font-mono text-slate-900 dark:text-slate-200 font-semibold">{activeItem.quantity} Units</span>
               </div>
               <div>
-                <span className="text-slate-400 block text-[10px] uppercase font-mono">Current Station</span>
-                <span className="font-mono text-cyan-400 font-semibold uppercase">
+                <span className="text-slate-500 dark:text-slate-400 block text-[10px] uppercase font-mono">Current Station</span>
+                <span className="font-mono text-sky-600 dark:text-sky-400 font-semibold uppercase">
                   {activeItem.currentStage}
                 </span>
               </div>
               <div>
-                <span className="text-slate-400 block text-[10px] uppercase font-mono">Recipient</span>
-                <span className="font-mono text-amber-300 font-semibold">
-                  {activeItem.customerName || 'In Facility'}
+                <span className="text-slate-500 dark:text-slate-400 block text-[10px] uppercase font-mono">Consignee</span>
+                <span className="font-mono text-slate-800 dark:text-slate-200 font-medium">
+                  {activeItem.customerName || 'In Hub Storage'}
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Pipeline Stepper Visualization */}
-          <div className="relative pt-3 pb-2 overflow-x-auto">
-            <div className="flex items-center justify-between min-w-[620px] relative">
+          {/* Stepper Pipeline */}
+          <div className="relative pt-2 pb-2 overflow-x-auto">
+            <div className="flex items-center justify-between min-w-[580px] relative px-4">
               {/* Connecting Line */}
-              <div className="absolute top-5 left-8 right-8 h-0.5 bg-slate-800 -z-0" />
+              <div className="absolute top-4 left-8 right-8 h-0.5 bg-slate-200 dark:bg-slate-800 -z-0" />
               <div
-                className="absolute top-5 left-8 h-0.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500 transition-all duration-700 -z-0"
+                className="absolute top-4 left-8 h-0.5 bg-emerald-500 transition-all duration-500 -z-0"
                 style={{
-                  width: `${(currentStageIndex / (stageOrder.length - 1)) * 90}%`,
+                  width: `${(currentStageIndex / (stageOrder.length - 1)) * 88}%`,
                 }}
               />
 
@@ -133,38 +135,34 @@ export const StockPulseTracker: React.FC<StockPulseTrackerProps> = ({ items }) =
                   <div key={st.stage} className="flex flex-col items-center relative z-10">
                     <div
                       className={cn(
-                        'w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300',
+                        'w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-200 text-xs',
                         isCurrent
-                          ? 'border-emerald-400 bg-emerald-500 text-white shadow-glow-primary scale-110'
+                          ? 'border-emerald-600 dark:border-emerald-500 bg-emerald-600 dark:bg-emerald-500 text-white shadow-xs'
                           : isPassed
-                          ? 'border-emerald-500/50 bg-slate-900 text-emerald-400'
-                          : 'border-slate-800 bg-slate-950 text-slate-400'
+                          ? 'border-emerald-500/60 bg-emerald-50 dark:bg-slate-900 text-emerald-600 dark:text-emerald-400'
+                          : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-400'
                       )}
                     >
                       {isPassed ? (
-                        <CheckCircle2 className="w-5 h-5" />
+                        <CheckCircle2 className="w-4 h-4" />
                       ) : isCurrent ? (
-                        <Icon className="w-5 h-5 animate-pulse" />
+                        <Icon className="w-4 h-4" />
                       ) : (
-                        <Icon className="w-4 h-4 opacity-50" />
+                        <Icon className="w-3.5 h-3.5 opacity-60" />
                       )}
                     </div>
 
                     <span
                       className={cn(
-                        'mt-2 text-xs font-semibold tracking-tight',
+                        'mt-1.5 text-xs tracking-tight',
                         isCurrent
-                          ? 'text-emerald-400'
+                          ? 'text-emerald-600 dark:text-emerald-400 font-semibold'
                           : isPassed
-                          ? 'text-slate-300'
-                          : 'text-slate-400'
+                          ? 'text-slate-800 dark:text-slate-200 font-medium'
+                          : 'text-slate-400 dark:text-slate-400'
                       )}
                     >
                       {st.label}
-                    </span>
-
-                    <span className="text-[10px] font-mono text-slate-400">
-                      {isCurrent ? 'Active' : isPassed ? 'Verified' : 'Pending'}
                     </span>
                   </div>
                 );
@@ -182,40 +180,40 @@ export const StockPulseTracker: React.FC<StockPulseTrackerProps> = ({ items }) =
                 <div
                   key={step.stage}
                   className={cn(
-                    'p-3.5 rounded-xl border transition-all text-xs',
+                    'p-3 rounded-lg border text-xs transition-colors',
                     isNow
-                      ? 'bg-emerald-950/20 border-emerald-500/40 shadow-sm'
+                      ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-300 dark:border-emerald-800/60'
                       : isPast
-                      ? 'bg-slate-900/40 border-slate-800'
-                      : 'bg-slate-950/30 border-slate-900 opacity-60'
+                      ? 'bg-slate-50/60 dark:bg-slate-900/40 border-slate-200 dark:border-slate-800/80'
+                      : 'bg-white dark:bg-slate-900/20 border-slate-100 dark:border-slate-800/40 opacity-60'
                   )}
                 >
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
-                      Phase {idx + 1}: {step.stage}
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="font-mono text-[10px] uppercase text-slate-500 dark:text-slate-400 font-medium">
+                      Stage {idx + 1}: {step.stage}
                     </span>
                     {step.status === 'COMPLETED' ? (
-                      <span className="text-emerald-400 flex items-center gap-1 font-mono text-[10px]">
-                        <CheckCircle2 size={12} /> Done
+                      <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-mono text-[10px] font-medium">
+                        <CheckCircle2 size={11} /> Verified
                       </span>
                     ) : step.status === 'IN_PROGRESS' ? (
-                      <span className="text-cyan-400 flex items-center gap-1 font-mono text-[10px]">
-                        <Clock size={12} className="animate-spin" /> In Progress
+                      <span className="text-sky-600 dark:text-sky-400 flex items-center gap-1 font-mono text-[10px] font-medium">
+                        <Clock size={11} className="animate-spin" /> In Progress
                       </span>
                     ) : (
-                      <span className="text-slate-400 font-mono text-[10px]">Awaiting</span>
+                      <span className="text-slate-400 font-mono text-[10px]">Queued</span>
                     )}
                   </div>
 
-                  <h5 className="font-semibold text-slate-100">{step.title}</h5>
-                  <p className="text-[11px] text-slate-400 mt-0.5">{step.subtitle}</p>
+                  <h5 className="font-medium text-slate-900 dark:text-slate-100">{step.title}</h5>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{step.subtitle}</p>
 
                   {step.details && (
-                    <div className="mt-2 pt-2 border-t border-slate-800/80 space-y-1 font-mono text-[10px]">
+                    <div className="mt-2 pt-2 border-t border-slate-200/60 dark:border-slate-800/60 space-y-0.5 font-mono text-[10px]">
                       {Object.entries(step.details).map(([k, v]) => (
-                        <div key={k} className="flex items-center justify-between text-slate-400">
+                        <div key={k} className="flex items-center justify-between text-slate-500 dark:text-slate-400">
                           <span>{k}:</span>
-                          <span className="text-slate-200">{String(v)}</span>
+                          <span className="text-slate-800 dark:text-slate-200 font-medium">{String(v)}</span>
                         </div>
                       ))}
                     </div>

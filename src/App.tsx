@@ -20,7 +20,7 @@ import { AlertsView } from './features/alerts/AlertsView';
 import { dbService } from './services/databaseService';
 import { COLLECTIONS } from './firebase/collections';
 import { Warehouse, Alert } from './types';
-import { isFirebaseConfigured } from './firebase/config';
+
 
 type AuthView = 'login' | 'signup' | 'forgot';
 
@@ -137,20 +137,7 @@ const AppContent: React.FC = () => {
         warehouses={warehouses}
         alerts={alerts}
       >
-        {/* Environment banner indicator */}
-        {!isFirebaseConfigured() && (
-          <div className="mb-4 px-3.5 py-2 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-xs text-cyan-300 flex items-center justify-between">
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-              <span>
-                <strong>StockSense Demo Mode:</strong> Running with reactive in-memory seed dataset for Odoo × GCET 2026. All transactions and calculations are live.
-              </span>
-            </span>
-            <span className="hidden sm:inline font-mono text-[10px] text-cyan-400">
-              Zero-config ready
-            </span>
-          </div>
-        )}
+
 
         {renderCurrentView()}
       </MainLayout>

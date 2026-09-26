@@ -47,22 +47,22 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       : warehouses.find((w) => w.id === selectedWarehouseId);
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
+    <div className="space-y-6 animate-in fade-in duration-150">
       {/* Top Banner / Headline */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between pb-2 gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-1 gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-              Inventory Command Center
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+              Inventory Overview
             </h1>
             <Badge variant="success" size="sm" dot>
-              Real-time Firestore
+              Live Sync
             </Badge>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
             {activeWarehouse
-              ? `Operational view filtered for ${activeWarehouse.name} (${activeWarehouse.code})`
-              : 'Global network overview across all hubs, transit routes, and customer dispatches'}
+              ? `Filtered for ${activeWarehouse.name} (${activeWarehouse.code})`
+              : 'Global network overview across all warehouse hubs and transit routes'}
           </p>
         </div>
 
@@ -74,7 +74,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             onClick={() => onNavigateTo('ledger')}
             className="hidden sm:inline-flex"
           >
-            <History size={14} />
+            <History size={13} />
             <span>Audit Ledger</span>
           </Button>
 
@@ -82,9 +82,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             variant="primary"
             size="sm"
             onClick={() => setIsQuickOpOpen(true)}
-            className="shadow-glow-primary"
           >
-            <Zap size={14} />
+            <Zap size={13} />
             <span>Quick Move / Adjust</span>
           </Button>
         </div>
@@ -94,7 +93,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       <DashboardMetrics metrics={metrics} onNavigateTo={onNavigateTo} />
 
       {/* Middle Row: Inventory Health Gauge & Stock Movement Chart */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         <div className="lg:col-span-1">
           <InventoryHealthGauge health={metrics.health} />
         </div>
@@ -107,26 +106,26 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       <StockPulseTracker items={stockPulseItems} />
 
       {/* Charts Row: Incoming vs Outgoing & Category Breakdown */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         <IncomingOutgoingChart data={incomingOutgoingData} />
         <CategoryBreakdownChart data={categoryBreakdownData} />
       </div>
 
       {/* Recent Stock Ledger Transactions Table */}
-      <div className="glass-panel rounded-2xl p-5 border border-slate-800">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+      <div className="enterprise-card p-5">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800/80 mb-3">
           <div className="flex items-center gap-2">
-            <Activity className="w-4 h-4 text-emerald-400" />
-            <h3 className="text-sm font-semibold text-white tracking-tight">
+            <Activity className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">
               Recent Stock Ledger Transactions
             </h3>
           </div>
           <button
             onClick={() => onNavigateTo('ledger')}
-            className="text-xs text-emerald-400 hover:text-emerald-300 font-medium flex items-center gap-1 transition"
+            className="text-xs text-emerald-600 dark:text-emerald-400 hover:underline font-medium flex items-center gap-1 transition"
           >
             <span>View Full Ledger</span>
-            <ArrowRight size={13} />
+            <ArrowRight size={12} />
           </button>
         </div>
 
@@ -136,7 +135,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               <TableHead>Time</TableHead>
               <TableHead>SKU & Product</TableHead>
               <TableHead>Type</TableHead>
-              <TableHead>Warehouse / Location</TableHead>
+              <TableHead>Location</TableHead>
               <TableHead>Delta</TableHead>
               <TableHead>New Balance</TableHead>
               <TableHead>Reference</TableHead>
@@ -145,14 +144,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           <TableBody>
             {ledgerEntries.slice(0, 5).map((entry) => (
               <TableRow key={entry.id}>
-                <TableCell className="font-mono text-slate-400 whitespace-nowrap">
+                <TableCell className="font-mono text-slate-500 dark:text-slate-400 whitespace-nowrap">
                   {formatDate(entry.timestamp)}
                 </TableCell>
                 <TableCell>
-                  <span className="font-mono text-emerald-400 block font-semibold">
+                  <span className="font-mono text-emerald-600 dark:text-emerald-400 block font-semibold">
                     {entry.sku}
                   </span>
-                  <span className="text-slate-300 truncate max-w-xs block text-[11px]">
+                  <span className="text-slate-700 dark:text-slate-300 truncate max-w-xs block text-[11px]">
                     {entry.productName}
                   </span>
                 </TableCell>
@@ -160,27 +159,27 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   <span
                     className={`inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase ${
                       entry.quantityDelta > 0
-                        ? 'bg-emerald-500/10 text-emerald-400'
-                        : 'bg-rose-500/10 text-rose-400'
+                        ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/40'
+                        : 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-800/40'
                     }`}
                   >
                     {entry.movementType.replace(/_/g, ' ')}
                   </span>
                 </TableCell>
-                <TableCell className="text-slate-300 text-xs">
+                <TableCell className="text-slate-700 dark:text-slate-300 text-xs">
                   {entry.warehouseName} ({entry.locationName})
                 </TableCell>
                 <TableCell
-                  className={`font-mono font-bold ${
-                    entry.quantityDelta > 0 ? 'text-emerald-400' : 'text-rose-400'
+                  className={`font-mono font-semibold ${
+                    entry.quantityDelta > 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'
                   }`}
                 >
                   {entry.quantityDelta > 0 ? `+${entry.quantityDelta}` : entry.quantityDelta}
                 </TableCell>
-                <TableCell className="font-mono font-semibold text-white">
+                <TableCell className="font-mono font-semibold text-slate-900 dark:text-white">
                   {entry.balanceAfter}
                 </TableCell>
-                <TableCell className="font-mono text-slate-400 text-[11px]">
+                <TableCell className="font-mono text-slate-500 dark:text-slate-400 text-[11px]">
                   {entry.referenceId}
                 </TableCell>
               </TableRow>

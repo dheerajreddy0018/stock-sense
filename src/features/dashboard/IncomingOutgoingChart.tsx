@@ -21,46 +21,46 @@ interface IncomingOutgoingChartProps {
 
 export const IncomingOutgoingChart: React.FC<IncomingOutgoingChartProps> = ({ data }) => {
   return (
-    <div className="glass-panel rounded-2xl p-5 border border-slate-800 flex flex-col h-80">
-      <div className="flex items-center justify-between pb-3 border-b border-slate-800/80 mb-2">
+    <div className="enterprise-card p-5 flex flex-col h-80">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800/80 mb-2">
         <div className="flex items-center gap-2">
-          <ArrowLeftRight className="w-4 h-4 text-cyan-400" />
-          <h3 className="text-sm font-semibold text-white tracking-tight">
+          <ArrowLeftRight className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">
             Incoming vs Outgoing Pipeline
           </h3>
         </div>
-        <span className="text-[11px] font-mono text-slate-400">Total Units</span>
+        <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">Total Units</span>
       </div>
 
       <div className="flex-1 w-full min-h-0 pt-2">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#64748b" strokeOpacity={0.15} vertical={false} />
             <XAxis
               dataKey="name"
-              stroke="#64748b"
+              stroke="#94a3b8"
               fontSize={11}
               tickLine={false}
-              axisLine={{ stroke: '#334155' }}
+              axisLine={false}
             />
             <YAxis
-              stroke="#64748b"
+              stroke="#94a3b8"
               fontSize={11}
               tickLine={false}
-              axisLine={{ stroke: '#334155' }}
+              axisLine={false}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#0b1120',
-                borderColor: '#1e293b',
-                borderRadius: '0.75rem',
+                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                borderColor: 'rgba(255, 255, 255, 0.1)',
+                borderRadius: '0.5rem',
                 fontSize: '12px',
                 color: '#f8fafc',
-                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
               }}
               formatter={(value: number) => [`${value} units`, 'Volume']}
             />
-            <Bar dataKey="units" radius={[8, 8, 0, 0]} barSize={42}>
+            <Bar dataKey="units" radius={[6, 6, 0, 0]} barSize={36}>
               {data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.fill} />
               ))}

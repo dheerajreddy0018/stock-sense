@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from './AuthContext';
 import { UserRole } from '../../types';
-import { ShieldCheck, Mail, Lock, ArrowRight, UserCheck, AlertCircle } from 'lucide-react';
+import { Boxes, Mail, Lock, ArrowRight, AlertCircle } from 'lucide-react';
 
 interface LoginFormProps {
   onSuccess?: () => void;
@@ -49,100 +49,103 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-sm mx-auto">
       {/* Brand Header */}
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 shadow-glow-primary mb-3">
-          <ShieldCheck className="w-8 h-8 text-white" />
+      <div className="text-center mb-6">
+        <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-emerald-600 dark:bg-emerald-500 text-white shadow-sm mb-3">
+          <Boxes className="w-6 h-6" />
         </div>
-        <h1 className="text-2xl font-bold tracking-tight text-white">StockSense</h1>
-        <p className="text-xs uppercase tracking-widest font-mono text-emerald-400 mt-1">
-          Odoo × GCET Hackathon 2026
+        <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">StockSense</h1>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+          Intelligent Inventory & Stock Operations
         </p>
-        <p className="text-slate-400 text-sm mt-2">Sign in to access your inventory control center</p>
       </div>
 
-      {/* Main Glass Card */}
-      <div className="glass-panel rounded-2xl p-6 sm:p-8">
-        {/* Hackathon Quick Role Switchers */}
-        <div className="mb-6 pb-6 border-b border-slate-800">
-          <div className="flex items-center gap-2 mb-3">
-            <UserCheck className="w-4 h-4 text-emerald-400" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-              Instant Hackathon Demo Login
+      {/* Main Card */}
+      <div className="enterprise-card p-6 sm:p-7 shadow-md">
+        {/* Preset Role Switchers */}
+        <div className="mb-5 pb-5 border-b border-slate-100 dark:border-slate-800">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-slate-400">
+              Demo Access
             </span>
+            <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">Ready</span>
           </div>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-1.5">
             <button
               type="button"
               onClick={() => handleDemoLogin('ADMIN')}
-              className="px-2.5 py-2 rounded-xl bg-slate-800/80 hover:bg-emerald-600/20 hover:border-emerald-500/50 border border-slate-700/80 text-xs font-medium text-slate-200 transition-all text-center flex flex-col items-center gap-1"
+              className="px-2 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-center transition flex flex-col items-center"
             >
-              <span className="text-emerald-400 font-bold">Admin</span>
-              <span className="text-[10px] text-slate-400">Full Access</span>
+              <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Admin</span>
+              <span className="text-[10px] text-slate-400">All rights</span>
             </button>
             <button
               type="button"
               onClick={() => handleDemoLogin('INVENTORY_MANAGER')}
-              className="px-2.5 py-2 rounded-xl bg-slate-800/80 hover:bg-cyan-600/20 hover:border-cyan-500/50 border border-slate-700/80 text-xs font-medium text-slate-200 transition-all text-center flex flex-col items-center gap-1"
+              className="px-2 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-center transition flex flex-col items-center"
             >
-              <span className="text-cyan-400 font-bold">Manager</span>
-              <span className="text-[10px] text-slate-400">Stock & Moves</span>
+              <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Manager</span>
+              <span className="text-[10px] text-slate-400">Inventory</span>
             </button>
             <button
               type="button"
               onClick={() => handleDemoLogin('WAREHOUSE_STAFF')}
-              className="px-2.5 py-2 rounded-xl bg-slate-800/80 hover:bg-amber-600/20 hover:border-amber-500/50 border border-slate-700/80 text-xs font-medium text-slate-200 transition-all text-center flex flex-col items-center gap-1"
+              className="px-2 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-center transition flex flex-col items-center"
             >
-              <span className="text-amber-400 font-bold">Staff</span>
-              <span className="text-[10px] text-slate-400">Floor Ops</span>
+              <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Staff</span>
+              <span className="text-[10px] text-slate-400">Logistics</span>
             </button>
           </div>
         </div>
 
         {(localError || error) && (
-          <div className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-start gap-2.5 text-rose-300 text-xs">
-            <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-rose-400" />
+          <div className="mb-4 p-2.5 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/40 flex items-start gap-2 text-rose-700 dark:text-rose-400 text-xs">
+            <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
             <span>{localError || error}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3.5">
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1.5">Work Email</label>
+            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+              Email Address
+            </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Mail className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@stocksense.io"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950/60 border border-slate-800 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-sm text-white placeholder-slate-500 outline-none transition"
+                className="w-full pl-9 pr-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-emerald-500 focus:outline-none text-xs text-slate-900 dark:text-white placeholder-slate-400 transition"
               />
             </div>
           </div>
 
           <div>
-            <div className="flex items-center justify-between mb-1.5">
-              <label className="block text-xs font-medium text-slate-300">Password</label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-xs font-medium text-slate-700 dark:text-slate-300">
+                Password
+              </label>
               {onNavigateToForgot && (
                 <button
                   type="button"
                   onClick={onNavigateToForgot}
-                  className="text-xs text-emerald-400 hover:text-emerald-300 transition"
+                  className="text-[11px] text-emerald-600 dark:text-emerald-400 hover:underline"
                 >
                   Forgot password?
                 </button>
               )}
             </div>
             <div className="relative">
-              <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Lock className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••••••"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950/60 border border-slate-800 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-sm text-white placeholder-slate-500 outline-none transition"
+                className="w-full pl-9 pr-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-emerald-500 focus:outline-none text-xs text-slate-900 dark:text-white placeholder-slate-400 transition"
               />
             </div>
           </div>
@@ -150,28 +153,28 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-medium text-sm transition-all shadow-glow-primary flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full mt-2 py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs transition shadow-xs flex items-center justify-center gap-1.5 disabled:opacity-50"
           >
             {loading ? (
-              <span className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+              <span className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
             ) : (
               <>
-                <span>Sign In to Dashboard</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Sign In to System</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </>
             )}
           </button>
         </form>
 
         {onNavigateToSignup && (
-          <div className="mt-6 text-center text-xs text-slate-400">
-            Don't have an operator account?{' '}
+          <div className="mt-5 text-center text-xs text-slate-500 dark:text-slate-400">
+            Need an account?{' '}
             <button
               type="button"
               onClick={onNavigateToSignup}
-              className="text-emerald-400 hover:text-emerald-300 font-medium underline-offset-4 hover:underline"
+              className="text-emerald-600 dark:text-emerald-400 font-medium hover:underline"
             >
-              Register team member
+              Register here
             </button>
           </div>
         )}
