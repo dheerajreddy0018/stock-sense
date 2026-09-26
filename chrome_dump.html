@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>StockSense — Intelligent Real-Time Inventory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <script>
+    window.addEventListener('error', function(e) {
+      console.error('WINDOW ERROR:', e.error || e.message);
+      document.body.innerHTML += '<div id="module-error" style="color:#ff3333;background:#1a0000;border:2px solid red;padding:20px;font-size:16px;font-family:monospace;margin:20px;z-index:999999;position:relative;"><b>MODULE ERROR:</b> ' + (e.message || 'Unknown error') + '<br/>File: ' + e.filename + ':' + e.lineno + '</div>';
+    });
+    window.addEventListener('unhandledrejection', function(e) {
+      console.error('UNHANDLED REJECTION:', e.reason);
+      document.body.innerHTML += '<div id="module-error" style="color:#ff8833;background:#1a0800;border:2px solid orange;padding:20px;font-size:16px;font-family:monospace;margin:20px;z-index:999999;position:relative;"><b>PROMISE REJECTION:</b> ' + (e.reason ? (e.reason.stack || e.reason.message || e.reason) : 'Unknown rejection') + '</div>';
+    });
+    // Synchronously initialize root namespaces to ensure all ES modules share the same state
+    window.SS = window.SS || {};
+    window.__SSAPP = window.__SSAPP || {
+      state: {
+        user: null,
+        route: "login",
+        activeSearch: ""
+      },
+      PAGE_RENDERERS: {},
+      root: null
+    };
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module" src="./src/main.js"></script>
+
+
+</body></html>

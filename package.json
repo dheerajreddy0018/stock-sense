@@ -1,0 +1,22 @@
+{
+  "name": "stocksense",
+  "version": "2.0.0",
+  "description": "StockSense — Intelligent Real-Time Inventory, Product Ranks & SLA Management Engine",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "inventory",
+    "warehouse",
+    "odoo",
+    "erp",
+    "stocksense",
+    "sla",
+    "product-ranks",
+    "sales-analytics"
+  ],
+  "author": "StockSense Team",
+  "license": "MIT"
+}
